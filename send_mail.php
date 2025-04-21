@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subj    = strip_tags(trim($_POST['subject']));
     $message = strip_tags(trim($_POST['message']));
 
-    $to      = 'info@ellipticalenterprise.com';
+    $to      = 'info@ellipticalenterprises.com';
     $subject = "Website Contact: " . ($subj ?: 'No subject');
     $body    = "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message";
     $headers = "From: $email\r\nReply-To: $email\r\n";
