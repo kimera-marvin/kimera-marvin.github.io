@@ -6,16 +6,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subj    = strip_tags(trim($_POST['subject']));
     $message = strip_tags(trim($_POST['message']));
 
-    $to      = 'info@ellipticalenterprises.com';
-    $subject = "Website Contact: " . ($subj ?: 'No subject');
-    $body    = "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message";
-    $headers = "From: $email\r\nReply-To: $email\r\n";
+    if ($name && $email && $message) {
+        $to      = 'info@ellipticalenterprises.com';
+        $subject = "Website Contact: " . ($subj ?: 'No subject');
+        $body    = "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message";
+        $headers = "From: $email\r\nReply-To: $email\r\n";
 
-    if (mail($to, $subject, $body, $headers)) {
-        header('Location: thank_you.html');
-        exit;
+        if (mail($to, $subject, $body, $headers)) {
+            header('Location: contact.html?success=1'); 
+            exit;
+        } else {
+            echo 'Sorry, something went wrong. Please try again later.';
+        }
     } else {
-        echo 'Sorry, something went wrong. Please try again later.';
+        echo 'Please fill out all required fields.';
     }
 }
 ?>
